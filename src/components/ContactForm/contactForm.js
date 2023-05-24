@@ -1,12 +1,11 @@
 import React, { useState} from 'react';
-import { nanoid } from 'nanoid';
 import styles from './style.module.css';
 
 //redux's hooks import
 import { useDispatch, useSelector } from 'react-redux';
-//actions import
-import { addContact } from 'redux/contactsSlice';
+
 import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 
 export const ContactForm = () => {
@@ -27,7 +26,7 @@ const handleChangeNumber = event => {
 
 const contacts = useSelector(selectContacts);
 
-const isContactExist = contacts.find(
+const isContactExist = contacts.items.find(
   contact => contact.name.toLowerCase() === name.toLowerCase()
 );
 
@@ -38,7 +37,6 @@ const handleSubmit = event => {
   }
   
   const data = {
-    id: nanoid(),
     name,
     number,
   };
